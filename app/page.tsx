@@ -10,52 +10,52 @@ export default function Home() {
     } catch {
       return [];
     }
-  }).sort((a, b) => (a.date > b.date ? -1 : 1)).slice(0, 5);
+  }).sort((a, b) => (a.date > b.date ? -1 : 1)).slice(0, 8);
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-16">
-      <div className="mb-20">
-        <p className="text-lg text-gray-700 leading-relaxed">
-          考えたこと、試したこと、続けていることを静かに記録しています。
-        </p>
-      </div>
+    <div className="min-h-[60vh]">
+      <div className="max-w-4xl mx-auto px-8 py-24 md:py-32">
+        <div className="mb-32 md:mb-40">
+          <p className="text-lg md:text-xl text-gray-600 leading-[1.8] font-light tracking-wide max-w-2xl">
+            考えたこと、試したこと、続けていることを記録しています。
+          </p>
+        </div>
 
-      {allPosts.length > 0 && (
-        <section>
-          <h2 className="text-sm font-semibold text-gray-900 mb-8 tracking-wide uppercase">
-            Recent
-          </h2>
-          <ul className="space-y-8">
-            {allPosts.map((post) => (
-              <li key={`${post.category}-${post.slug}`}>
-                <Link
-                  href={`/${post.category}/${post.slug}`}
-                  className="group block"
-                >
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-baseline gap-3">
-                      <time className="text-sm text-gray-500 font-mono">
-                        {post.date}
-                      </time>
-                      <span className="text-xs text-gray-400 uppercase tracking-wide">
-                        {post.category}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-gray-600 transition-colors">
-                      {post.title}
-                    </h3>
-                    {post.description && (
-                      <p className="text-sm text-gray-600 leading-relaxed">
-                        {post.description}
-                      </p>
-                    )}
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+        {allPosts.length > 0 && (
+          <section>
+            <ul className="space-y-16 md:space-y-20">
+              {allPosts.map((post) => (
+                <li key={`${post.category}-${post.slug}`}>
+                  <Link
+                    href={`/${post.category}/${post.slug}`}
+                    className="group block"
+                  >
+                    <article className="space-y-3">
+                      <div className="flex items-center gap-4 text-xs tracking-wider">
+                        <time className="text-gray-300 font-mono tabular-nums">
+                          {post.date}
+                        </time>
+                        <span className="w-1 h-1 rounded-full bg-gray-200"></span>
+                        <span className="text-gray-300 uppercase text-[10px] tracking-[0.15em]">
+                          {post.category}
+                        </span>
+                      </div>
+                      <h2 className="text-xl md:text-2xl font-light text-gray-900 group-hover:text-gray-400 transition-all duration-500 leading-snug tracking-tight">
+                        {post.title}
+                      </h2>
+                      {post.description && (
+                        <p className="text-sm md:text-base text-gray-400 leading-relaxed pt-2 max-w-2xl">
+                          {post.description}
+                        </p>
+                      )}
+                    </article>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
     </div>
   );
 }
