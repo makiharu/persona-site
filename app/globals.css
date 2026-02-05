@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #fefefe;
-  --foreground: #1a1a1a;
+  --background: #ffffff;
+  --foreground: #111827;
 }
 
 body {
@@ -13,25 +13,53 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "palt" 1;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 
 @layer base {
   h1, h2, h3, h4, h5, h6 {
-    font-weight: 300;
-    letter-spacing: -0.03em;
+    font-weight: 400;
   }
-  
-  * {
-    transition-property: color, background-color, border-color;
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out;
+
+  a {
+    text-decoration: none;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+/* Typography adjustments for minimal aesthetic */
+@layer components {
+  .prose {
+    @apply text-gray-700;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply font-normal text-gray-900;
+  }
+
+  .prose a {
+    @apply text-gray-900 no-underline transition-colors duration-500;
+  }
+
+  .prose a:hover {
+    @apply text-gray-400;
+  }
+
+  .prose code {
+    @apply text-gray-900 bg-gray-50 px-1 py-0.5 rounded-none;
+  }
+
+  .prose pre {
+    @apply bg-gray-50 text-gray-900;
   }
 }

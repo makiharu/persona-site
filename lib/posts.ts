@@ -10,6 +10,8 @@ export type Post = {
   date: string;
   category: string;
   description?: string;
+  tags?: string[];
+  draft?: boolean;
   content: string;
 };
 
@@ -41,6 +43,8 @@ export function getPostBySlug(category: string, slug: string): Post {
     date: data.date,
     category,
     description: data.description,
+    tags: data.tags || [],
+    draft: data.draft || false,
     content,
   };
 }
@@ -49,10 +53,24 @@ export function getAllPosts(category: string): Post[] {
   const slugs = getPostSlugs(category);
   const posts = slugs
     .map((slug) => getPostBySlug(category, slug))
+    // 本番環境では draft を除外
+    .filter((post) => process.env.NODE_ENV === 'development' || !post.draft)
     .sort((a, b) => (a.date > b.date ? -1 : 1));
   return posts;
 }
 
 export function getAllCategories(): string[] {
-  return ['engineer', 'magic', 'running', 'habits', 'notes'];
+  return ['engineer', 'magic', 'reading', 'habits', 'notes'];
+}
+
+export function getAllPostsFromAllCategories(): Post[] {
+  const categories = getAllCategories();
+  const allPosts = categories.flatMap(category => {
+    try {
+      return getAllPosts(category);
+    } catch {
+      return [];
+    }
+  });
+  return allPosts.sort((a, b) => (a.date > b.date ? -1 : 1));
 }

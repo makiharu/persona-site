@@ -1,9 +1,9 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-50 mt-40">
-      <div className="max-w-4xl mx-auto px-8 py-20">
-        <p className="text-xs text-gray-300 tracking-wider">
-          © {new Date().getFullYear()}
+    <footer className="mt-32 md:mt-40 border-t border-gray-100">
+      <div className="max-w-[760px] mx-auto px-6 md:px-8 py-12 md:py-16">
+        <p className="text-xs text-gray-200">
+          © {new Date().getFullYear()} makiharu
         </p>
       </div>
     </footer>

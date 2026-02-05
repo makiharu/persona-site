@@ -3,19 +3,19 @@ import { getAllPosts } from '@/lib/posts';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Magic - makiharu',
-  description: 'マジックについての考察と記録',
+  title: 'Notes - makiharu',
+  description: '雑記',
 };
 
-export default function MagicPage() {
-  const posts = getAllPosts('magic');
+export default function NotesPage() {
+  const posts = getAllPosts('notes');
 
   return (
     <div className="max-w-[760px] mx-auto px-6 md:px-8 py-16 md:py-20">
       <div className="mb-20 md:mb-24">
-        <h1 className="text-2xl md:text-3xl font-normal mb-8 text-gray-900">Magic</h1>
+        <h1 className="text-2xl md:text-3xl font-normal mb-8 text-gray-900">Notes</h1>
         <p className="text-sm md:text-base text-gray-500 leading-[1.8]">
-          マジックに関する考えや実践の記録。
+          日々の雑記。
         </p>
       </div>
 
@@ -24,7 +24,7 @@ export default function MagicPage() {
           <ul className="space-y-10 md:space-y-12">
             {posts.map((post) => (
               <li key={post.slug}>
-                <Link href={`/magic/${post.slug}`} className="group block">
+                <Link href={`/notes/${post.slug}`} className="group block">
                   <article>
                     <time className="text-xs text-gray-300 font-mono tabular-nums block mb-2">
                       {post.date}

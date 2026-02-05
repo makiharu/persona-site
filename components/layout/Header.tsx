@@ -1,57 +1,38 @@
 import Link from 'next/link';
 
-const categories = [
-  { name: 'Engineer', href: '/engineer' },
-  { name: 'Magic', href: '/magic' },
-  { name: 'Running', href: '/running' },
-  { name: 'Habits', href: '/habits' },
-  { name: 'Notes', href: '/notes' },
+const navItems = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/profile' },
+  { name: 'Archives', href: '/archives' },
+  { name: 'Search', href: '/search' },
 ];
 
 export default function Header() {
   return (
-    <header className="border-b border-gray-50">
-      <div className="max-w-4xl mx-auto px-8 py-16 md:py-20">
-        <Link 
-          href="/" 
-          className="inline-block text-2xl font-light tracking-[-0.03em] text-gray-900 hover:text-gray-500 transition-colors mb-12"
-        >
-          Your Name
-        </Link>
-        <nav className="mt-12">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-            <ul className="flex flex-col md:flex-row gap-y-3 gap-x-8 text-sm">
-              {categories.map((category) => (
-                <li key={category.href}>
+    <header className="border-b border-gray-100">
+      <div className="max-w-[760px] mx-auto px-6 md:px-8 py-6 md:py-8">
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="text-base md:text-lg font-normal text-gray-900 hover:text-gray-400 transition-colors duration-500"
+          >
+            makiharu
+          </Link>
+          <nav>
+            <ul className="flex gap-x-6 text-sm text-gray-400">
+              {navItems.map((item) => (
+                <li key={item.href}>
                   <Link
-                    href={category.href}
-                    className="text-gray-400 hover:text-gray-900 transition-all duration-300 inline-block"
+                    href={item.href}
+                    className="hover:text-gray-900 transition-colors duration-500"
                   >
-                    {category.name}
+                    {item.name}
                   </Link>
                 </li>
               ))}
             </ul>
-            <ul className="flex gap-8 text-sm">
-              <li>
-                <Link
-                  href="/profile"
-                  className="text-gray-400 hover:text-gray-900 transition-all duration-300"
-                >
-                  Profile
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/links"
-                  className="text-gray-400 hover:text-gray-900 transition-all duration-300"
-                >
-                  Links
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+          </nav>
+        </div>
       </div>
     </header>
   );

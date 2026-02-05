@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/posts';
+import { EXTERNAL_LINKS } from '@/lib/constants';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,50 +12,64 @@ export default function EngineerPage() {
   const posts = getAllPosts('engineer');
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-16">
-      <div className="mb-16">
-        <h1 className="text-3xl font-semibold mb-6 tracking-tight">Engineer</h1>
-        <div className="prose prose-gray max-w-none">
-          <p className="text-gray-700 leading-relaxed">
-            技術的な詳細や再現性のある内容は、今後 Qiita / Zenn に整理していく予定です。<br />
+    <div className="max-w-[760px] mx-auto px-6 md:px-8 py-16 md:py-20">
+      <div className="mb-20 md:mb-24">
+        <h1 className="text-2xl md:text-3xl font-normal mb-8 text-gray-900">Engineer</h1>
+        <div className="space-y-3 text-sm md:text-base text-gray-500 leading-[1.8]">
+          <p>
+            技術記事は現在はてなブログに掲載しています。必要に応じてQiita/Zennにも整理していく予定です。
+          </p>
+          <p>
             ここでは、その前段となる考えや試行錯誤を記録しています。
           </p>
         </div>
-        <div className="mt-6 flex gap-4 text-sm">
+        <div className="mt-8 flex gap-6 text-sm">
+          {EXTERNAL_LINKS.HATENA_BLOG && (
+            <a
+              href={EXTERNAL_LINKS.HATENA_BLOG}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-900 transition-colors duration-500"
+            >
+              はてなブログ →
+            </a>
+          )}
           <Link
             href="/links"
-            className="text-gray-600 hover:text-gray-900 underline underline-offset-2"
+            className="text-gray-400 hover:text-gray-900 transition-colors duration-500"
           >
-            技術記事はこちら →
+            その他のリンク →
           </Link>
         </div>
       </div>
 
-      {posts.length > 0 ? (
-        <ul className="space-y-10">
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <Link href={`/engineer/${post.slug}`} className="group block">
-                <article>
-                  <time className="text-sm text-gray-500 font-mono block mb-2">
-                    {post.date}
-                  </time>
-                  <h2 className="text-xl font-semibold mb-3 text-gray-900 group-hover:text-gray-600 transition-colors">
-                    {post.title}
-                  </h2>
-                  {post.description && (
-                    <p className="text-gray-600 leading-relaxed">
-                      {post.description}
-                    </p>
-                  )}
-                </article>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="text-gray-500 text-sm">記事はまだありません。</p>
-      )}
+      <section>
+        {posts.length > 0 ? (
+          <ul className="space-y-10 md:space-y-12">
+            {posts.map((post) => (
+              <li key={post.slug}>
+                <Link href={`/engineer/${post.slug}`} className="group block">
+                  <article>
+                    <time className="text-xs text-gray-300 font-mono tabular-nums block mb-2">
+                      {post.date}
+                    </time>
+                    <h2 className="text-lg md:text-xl text-gray-900 group-hover:text-gray-400 transition-colors duration-500 leading-relaxed">
+                      {post.title}
+                    </h2>
+                    {post.description && (
+                      <p className="text-sm text-gray-400 leading-relaxed mt-2">
+                        {post.description}
+                      </p>
+                    )}
+                  </article>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-gray-300">記事はまだありません。</p>
+        )}
+      </section>
     </div>
   );
 }
